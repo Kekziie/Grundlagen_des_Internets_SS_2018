@@ -68,9 +68,63 @@
 
 \subsection{Kommunikationsnetzwerke und Internet}
 
+Ein Netzwerk ist ein Set von Hardware und Software, dass Informationen weiterleitet.
+
+Beispiele für Netzwerke:
+\begin{itemize}
+\item POTS (Plain old telephone system)
+\item Broadcast networks (television, radio)
+\item mobile telephone networks
+\item computer networks (Intranet, Internet) 
+\end{itemize}
+
+$\Rightarrow$ Netzwerkevolution : Netzwerke vermischen sich
+
+z.B.
+\begin{itemize}
+\item triple play (Internet access, speech, television delivered over IP)
+\item Quadruple play (triple play over wireless)
+\end{itemize}
+
 %--------------------------------------------------------------------
 
 \subsection{Klassifikation}
+
+basierend auf den geographischen Umfang:
+\begin{itemize}
+\item sehr klein: Nano-Kommunikationsnetzwerk
+\item $0,1 m$ - $1 m$: PAN (Personal Area Network), interner Bus/ Netzwerk
+\item $10 m$ - $1 km$: LAN (Local Area Network)
+\item $1 km$ - $100 km$: MAN (Metropolitan Area Network)
+\item $100km$ und mehr: WAN (Wide Area Network)
+\item noch mehr: Satelliten Netzwerk, interplanetare Netzwerke, ...
+\end{itemize}
+
+räumliche Struktur
+\begin{itemize}
+\item full-mesh 
+belastbar auf Fehler, nicht ökonomisch für große Anzahl an Knoten, z.B. WiFi adhoc Netzwerk
+\item Stern
+zentral schaltender Knoten, ökonomisch, nicht belastbar, z.B. Gigabit Ethernet
+\item Baum
+hierarchisch mit Wurzeln, nicht belastbar, z.B. Telefonnetzwerk
+\item Bus
+benutzt als normales Übertragungsmedium, alles Stationen können Pakete senden und empfangen, keine Weiterleitung an Zwischengliedern benötigt, benötigt mehrere Zugangsprotokolle, z.B. Standard Ethernet
+\item Ring
+Knoten senden, empfangen und leiten Pakete weiter, Ränder zwischen Nachbarn, kann belastbar sein, wenn 2 Käbel in gegensätzliche Richtung agieren, benötigt mehrere Zugangsprotokolle, z.B. Token Ring
+\end{itemize}
+
+Übertragungsmodelle
+\begin{itemize}
+\item Unicast
+Information sendet an einem speziellen Knoten (point-to-point), z.B. telephone
+\item Broadcast
+Information sendet an alle Knoten im Netzwerk, z.B. Radio
+\item Multicast
+Information sendet an alle Knoten in einer definierten Gruppe (point-to-multipoint), z.B. Audio-/Videokonferenzen
+\item Anycast
+Information sendet an einen Knoten in einer Gruppe von möglichen Adressaten
+\end{itemize}
 
 %--------------------------------------------------------------------
 
