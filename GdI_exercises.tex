@@ -87,7 +87,7 @@ Man versteht unter horizontaler Kommunikation im OSI/ISO-Modell, dass Protokolle
 \section{Einkapselung von Daten} 
 Welcher Anteil der Netzbandbreite wird von den Headern belegt? \\
 Die belegte Netzbandbreite setzt sich aus der Nachricht M und den n Headern(h) zusammen (M + n * h)\newline
-$\frac{M+n*h}{100} * (n*h)$ Byte (in Prozent ausgedrückt) ist der Anteil der Netzbandbreite, welche von den Headern belegt wird.
+$\dfrac{hn}{M+hn}$ Byte (in Prozent ausgedrückt) ist der Anteil der Netzbandbreite, welche von den Headern belegt wird.
 
 \section{Protokollschichten}
 \subsection{1.}
@@ -97,7 +97,7 @@ Geben Sie an, welche Protokolle hierbei an den Punkten A-D auf den Schichten 2-4
 & A & B & C & D \\ \hline
 Protokollschicht 4 & TCP & & & TCP \\ \hline
 Protokollschicht 3 & IP & & IP & IP \\ \hline
-Protokollschicht 2 & Ethernet & Ethernet & Ethernet & Ethernet \\ \hline
+Protokollschicht 2 &  & Ethernet & Ethernet & Ethernet \\ \hline
 \end{tabular}
 
 \subsection{2.}
@@ -109,15 +109,15 @@ Zielport (Schicht 4) &  &  &  &  \\ \hline
 Quelladresse Schicht 3 & 193.196.30.23 & 193.196.30.23 & 193.196.30.23 & 193.196.30.23 \\ \hline
 Zieladresse Schicht 3 & 134.2.5.1 & 134.2.5.1 & 134.2.5.1 & 134.2.5.1 \\ \hline
 Quelladresse Schicht 2 & 42:59:3b:54:8a:91 & 42:59:3b:54:8a:91 & 42:59:3b:54:8a:91 & 42:3c:be:a8:56:fa \\ \hline
-Zieladresse Schicht 2 & 42:fd:12:5e:3d:09 & 42:fd:12:5e:3d:09 & 42:fd:12:5e:3d:09 & 42:8e:63:d7:f8:b2 \\ \hline
+Zieladresse Schicht 2 & 42:fd:12:5e:3d:09 & 42:fd:12:5e:3d:09 & 42:fd:12:5e:3d:09 & \\ \hline
 \end{tabular}
 
 \subsection{3.}
 Geben sie die jeweils höchste Protokollschicht an, die auf den jeweiligen Geräten verarbeitet wird! \\
 
 \begin{itemize}
-\item Laptop $\rightarrow$ Layer 2
-\item WLAN-Access-Point $\rightarrow$ Layer 3
+\item Laptop $\rightarrow$ Layer 7
+\item WLAN-Access-Point $\rightarrow$ Layer 2
 \item Ethernet Switch $\rightarrow$ Layer 2
 \item IP-Router $\rightarrow$ Layer 3
 \item Web-Server $\rightarrow$ Layer 7
