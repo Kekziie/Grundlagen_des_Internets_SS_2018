@@ -62,7 +62,67 @@
 
 %----------------------------------------------------------------------------------------
 
-\section{eins}
+\section{Aufgabe 1 ISO/OSI-Schichtenmodell}
+\subsection{1.}
+Ordnen Sie folgende Protkolle, Spezifikationen und Medien den Schicvhten 1-4 oder 7 des ISO/OSI-Models zu. \\
+Schicht 1: Koaxialkabel, Sichtverbindung\newline
+Schicht 2:\newline
+Schicht 3: IP\newline
+Schicht 4: TCP, UDP\newline
+Schicht 7: SMTP, HTTP, VoIP\newline
 
+\subsection{2.}
+Auf welchen der oben genannten Schichten "operieren" folgende Geräte und Standards? \\
+Schicht 1: Hub\newline
+Schicht 2: Bridge, PPP, IEEE 802.3, IEEE 802.11\newline
+Schicht 3: Router, Mobile Ip\newline
+Schicht 4: \newline
+Schicht 7: Web Browser\newline
+
+\subsection{3.}
+Was versteht man unter horizontaler und was unter vertikaler Kommunikation im ISO/OSI-Modell? \\
+Man versteht unter horizontaler Kommunikation im OSI/ISO-Modell, dass Protokolle nur in einer einzelnen Schicht ausgetauscht werden. Es werden keine Protokolle mit anderen Schichten ausgetauscht. Dafür interagieren (vertikale Kommunikation) die Schichten mit Diensten untereinander. Um diese Kommunikationsarten zu ermöglichen werden versandten Nachrichten bei jeder Schicht Header (teils auch Trailer) angehängt.\newline
+\includegraphics[width=15cm,height=10cm]{Bild.jpeg}
+
+\section{Aufgabe 2 Einkapselung von Daten} 
+Welcher Anteil der Netzbandbreite wird von den Headern belegt? \\
+Die belegte Netzbandbreite setzt sich aus der Nachricht M und den n Headern(h) zusammen (M + n * h)\newline
+$\frac{M+n*h}{100} * (n*h)$ Byte (in Prozent ausgedrückt) ist der Anteil der Netzbandbreite, welche von den Headern belegt wird.
+
+\section{Aufgabe 3 Protokollschichten}
+\subsection{1.}
+Geben Sie an, welche Protokolle hierbei an den Punkten A-D auf den Schichten 2-4 im ISO/OSI-Modell verwendet werden! \\
+
+\begin{tabular}{c|c|c|c|c}
+& A & B & C & D \\ \hline
+Protokollschicht 4 & TCP & & & TCP \\ \hline
+Protokollschicht 3 & IP & & IP & IP \\ \hline
+Protokollschicht 2 & Ethernet & Ethernet & Ethernet & Ethernet \\ \hline
+\end{tabular}
+
+\subsection{2.}
+Geben Sie an, welche Quell- und Zieladressen auf Schicht 2 und 3 und welchen Zielport auf Schicht 4 die Protkollheader jeweils an den Punkten A-D enthalten! \\
+
+\begin{tabular}{c|c|c|c|c}
+& A & B & C & D \\ \hline
+Zielport (Schicht 4) &  &  &  &  \\ \hline
+Quelladresse Schicht 3 & 193.196.30.23 & 193.196.30.23 & 193.196.30.23 & 193.196.30.23 \\ \hline
+Zieladresse Schicht 3 & 134.2.5.1 & 134.2.5.1 & 134.2.5.1 & 134.2.5.1 \\ \hline
+Quelladresse Schicht 2 & 42:59:3b:54:8a:91 & 42:59:3b:54:8a:91 & 42:59:3b:54:8a:91 & 42:3c:be:a8:56:fa \\ \hline
+Zieladresse Schicht 2 & 42:fd:12:5e:3d:09 & 42:fd:12:5e:3d:09 & 42:fd:12:5e:3d:09 & 42:8e:63:d7:f8:b2 \\ \hline
+\end{tabular}
+
+\subsection{3.}
+Geben sie die jeweils höchste Protokollschicht an, die auf den jeweiligen Geräten verarbeitet wird! \\
+
+\begin{itemize}
+\item Laptop $\rightarrow$ Layer 2
+\item WLAN-Access-Point $\rightarrow$ Layer 3
+\item Ethernet Switch $\rightarrow$ Layer 2
+\item IP-Router $\rightarrow$ Layer 3
+\item Web-Server $\rightarrow$ Layer 7
+\end{itemize}
+
+%----------------------------------------------------------------------------------------
 
 \end{document}
