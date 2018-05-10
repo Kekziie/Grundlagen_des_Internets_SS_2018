@@ -62,7 +62,7 @@
 
 %----------------------------------------------------------------------------------------
 
-\section{Aufgabe 1 ISO/OSI-Schichtenmodell}
+\section{ISO/OSI-Schichtenmodell}
 \subsection{1.}
 Ordnen Sie folgende Protkolle, Spezifikationen und Medien den Schicvhten 1-4 oder 7 des ISO/OSI-Models zu. \\
 Schicht 1: Koaxialkabel, Sichtverbindung\newline
@@ -84,12 +84,12 @@ Was versteht man unter horizontaler und was unter vertikaler Kommunikation im IS
 Man versteht unter horizontaler Kommunikation im OSI/ISO-Modell, dass Protokolle nur in einer einzelnen Schicht ausgetauscht werden. Es werden keine Protokolle mit anderen Schichten ausgetauscht. Dafür interagieren (vertikale Kommunikation) die Schichten mit Diensten untereinander. Um diese Kommunikationsarten zu ermöglichen werden versandten Nachrichten bei jeder Schicht Header (teils auch Trailer) angehängt.\newline
 \includegraphics[width=15cm,height=10cm]{Bild.jpeg}
 
-\section{Aufgabe 2 Einkapselung von Daten} 
+\section{Einkapselung von Daten} 
 Welcher Anteil der Netzbandbreite wird von den Headern belegt? \\
 Die belegte Netzbandbreite setzt sich aus der Nachricht M und den n Headern(h) zusammen (M + n * h)\newline
 $\frac{M+n*h}{100} * (n*h)$ Byte (in Prozent ausgedrückt) ist der Anteil der Netzbandbreite, welche von den Headern belegt wird.
 
-\section{Aufgabe 3 Protokollschichten}
+\section{Protokollschichten}
 \subsection{1.}
 Geben Sie an, welche Protokolle hierbei an den Punkten A-D auf den Schichten 2-4 im ISO/OSI-Modell verwendet werden! \\
 
@@ -121,6 +121,206 @@ Geben sie die jeweils höchste Protokollschicht an, die auf den jeweiligen Gerä
 \item Ethernet Switch $\rightarrow$ Layer 2
 \item IP-Router $\rightarrow$ Layer 3
 \item Web-Server $\rightarrow$ Layer 7
+\end{itemize}
+
+%----------------------------------------------------------------------------------------
+
+\section{Virtual Circuits}
+Geben Sie die Label-Forwardingtabellen der Router R1-R6 mit den Spalten In-Port,In-Label, Out-Port, Out Label an. \\
+
+R1:\newline
+\begin{tabular}{c|c|c|c}
+In-Port & In-Label & Out-Port & Out-Label \\\hline
+- & - & IF0 & L1 \\
+\end{tabular}\newline
+R2:\newline
+\begin{tabular}{c|c|c|c}
+In-Port & In-Label & Out-Port & Out-Label \\\hline
+- & - & IF0 & L4 \\
+\end{tabular}\newline
+R3:\newline
+\begin{tabular}{c|c|c|c}
+In-Port & In-Label & Out-Port & Out-Label \\\hline
+- & - & IF0 & L2\\
+\end{tabular}\newline
+R4:\newline
+\begin{tabular}{c|c|c|c}
+In-Port & In-Label & Out-Port & Out-Label \\\hline
+IF0 & L5 & IF1 & L6\\\hline
+IF0 & L5 & IF2 & L2\\\hline
+IF1 & L1 & IF0 & L3\\\hline
+IF2 & L4 & IF0 & L3\\
+\end{tabular}\newline
+R5:\newline
+\begin{tabular}{c|c|c|c}
+In-Port & In-Label & Out-Port & Out-Label \\\hline
+IF0 & L6 & IF1 & L5\\\hline
+IF0 & L6 & IF2 & L4\\\hline
+IF1 & L3 & IF0 & L1\\\hline
+IF2 & L2 & IF0 & L1\\
+\end{tabular}\newline
+R6:\newline
+\begin{tabular}{c|c|c|c}
+In-Port & In-Label & Out-Port & Out-Label \\\hline
+- & - & IF0 & L6\\
+\end{tabular}\newline
+
+%--------------------------------------------
+\section{Label Stacking}
+\subsection{1.}
+Forwarding ohne LSPs \\
+
+R1:\newline
+\begin{tabular}{c|c|c|c}
+In-Port & In-Label & Out-Port & Out-Label \\\hline
+- & - & FI0 & L0\\
+\end{tabular}\newline
+(A) Label Stack: L0, L1, L2, L3\newline
+R2:\newline
+\begin{tabular}{c|c|c|c}
+In-Port & In-Label & Out-Port & Out-Label \\\hline
+IF0 & L0 & IF1 & L1\\
+\end{tabular}\newline
+(B)Label Stack: L1, L2, L3\newline
+R3:\newline
+\begin{tabular}{c|c|c|c}
+In-Port & In-Label & Out-Port & Out-Label \\\hline
+IF0 & L1 & IF1 & L2\\
+\end{tabular}\newline
+(C)Label Stack: L2, L3\newline
+R4:\newline
+\begin{tabular}{c|c|c|c}
+In-Port & In-Label & Out-Port & Out-Label \\\hline
+IF1 & L2 & IF0 & L3\\
+\end{tabular}\newline
+(D)Label Stack: L3\newline
+R5:\newline
+\begin{tabular}{c|c|c|c}
+In-Port & In-Label & Out-Port & Out-Label \\\hline
+IF0 & L3 & - & -\\
+\end{tabular}\newline
+
+\subsection{2.}
+Forwarding über einen LSP von R1 bis R5 \\
+
+R1:\newline
+\begin{tabular}{c|c|c|c}
+In-Port & In-Label & Out-Port & Out-Label \\\hline
+- & - & IF0 & L0\\
+\end{tabular}\newline
+(A) Label Stack: L0\newline
+R2:\newline
+\begin{tabular}{c|c|c|c}
+In-Port & In-Label & Out-Port & Out-Label \\\hline
+IF0 & L0 & IF1 & L1\\
+\end{tabular}\newline
+(B)Label Stack: L1\newline
+R3:\newline
+\begin{tabular}{c|c|c|c}
+In-Port & In-Label & Out-Port & Out-Label \\\hline
+IF0 & L1 & IF1 & L2\\
+\end{tabular}\newline
+(C)Label Stack: L2\newline
+R4:\newline
+\begin{tabular}{c|c|c|c}
+In-Port & In-Label & Out-Port & Out-Label \\\hline
+IF0 & L2 & IF1 & L3\\
+\end{tabular}\newline
+(D)Label Stack: L3\newline
+R5:\newline
+\begin{tabular}{c|c|c|c}
+In-Port & In-Label & Out-Port & Out-Label \\\hline
+IF0 & L3 & - & -\\
+\end{tabular}\newline
+
+\subsection{3.}
+Forwarding über einen LSP von R2 bis R4
+
+R1:\newline
+\begin{tabular}{c|c|c|c}
+In-Port & In-Label & Out-Port & Out-Label \\\hline
+- & - & FI0 & L0\\
+\end{tabular}\newline
+(A) Label Stack: L0, L3\newline
+R2:\newline
+\begin{tabular}{c|c|c|c}
+In-Port & In-Label & Out-Port & Out-Label \\\hline
+IF0 & L0 & IF1 & L1\\
+\end{tabular}\newline
+(B)Label Stack: L1, L3\newline
+R3:\newline
+\begin{tabular}{c|c|c|c}
+In-Port & In-Label & Out-Port & Out-Label \\\hline
+IF0 & L1 & IF1 & L2\\
+\end{tabular}\newline
+(C)Label Stack: L2, L3\newline
+R4:\newline
+\begin{tabular}{c|c|c|c}
+In-Port & In-Label & Out-Port & Out-Label \\\hline
+IF1 & L2 & IF0 & L3\\
+\end{tabular}\newline
+(D)Label Stack: L3\newline
+R5:\newline
+\begin{tabular}{c|c|c|c}
+In-Port & In-Label & Out-Port & Out-Label \\\hline
+IF0 & L3 & - & -\\
+\end{tabular}\newline
+
+\subsection{4.}
+Forwarding über einen LSP von R1 bis R5, der seinerseits zwischen R2 bis R4 über einen weiteren LSP läuft \\
+
+R1:\newline
+\begin{tabular}{c|c|c|c}
+In-Port & In-Label & Out-Port & Out-Label \\\hline
+- & - & FI0 & L0\\
+\end{tabular}\newline
+(A) Label Stack: L0\newline
+R2:\newline
+\begin{tabular}{c|c|c|c}
+In-Port & In-Label & Out-Port & Out-Label \\\hline
+IF0 & L0 & IF1 & L1\\
+\end{tabular}\newline
+(B)Label Stack: L1\newline
+R3:\newline
+\begin{tabular}{c|c|c|c}
+In-Port & In-Label & Out-Port & Out-Label \\\hline
+IF0 & L1 & IF1 & L2\\
+\end{tabular}\newline
+(C)Label Stack: L2\newline
+R4:\newline
+\begin{tabular}{c|c|c|c}
+In-Port & In-Label & Out-Port & Out-Label \\\hline
+IF1 & L2 & IF0 & L3\\
+\end{tabular}\newline
+(D)Label Stack: L3\newline
+R5:\newline
+\begin{tabular}{c|c|c|c}
+In-Port & In-Label & Out-Port & Out-Label \\\hline
+IF0 & L3 & - & -\\
+\end{tabular}\newline
+
+%--------------------------------------------
+\section{IPv4-Adressen}
+
+\subsection{1.}
+Wie lang darf das IP-Präfix höchstens sein um die gewünschte Unterteilung in Subnetze zu ermöglichen? Geben Sie Netzwerkadresse und das Präfix an und begründen Sie ihre Antwort. \\
+
+Präfix: /23 \\
+Netzwerkadresse: 192.168.1.0 \\
+
+Das Präfix muss /23 höchstens sein, weil da 512 Hosts reinpassen. 
+
+\subsection{2.}
+Weisen Sie jeder Rechner Klasse einen IP-Adressbereich zu! \\
+
+\begin{itemize}
+\item Linux Server \\
+D $\rightarrow$ 192.168.3.52-102/26 \\
+\item Linux PCs \\
+B $\rightarrow$ 192.168.3.1-51 /26 \\
+\item Windows PCs \\
+A $\rightarrow$ 192.168.1.1-201 /24 \\ 
+C $\rightarrow$ 192.168.2.1-201/24 \\ 
 \end{itemize}
 
 %----------------------------------------------------------------------------------------
