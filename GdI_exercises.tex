@@ -305,24 +305,205 @@ IF0 & L3 & - & -\\
 \subsection{1.}
 Wie lang darf das IP-Präfix höchstens sein um die gewünschte Unterteilung in Subnetze zu ermöglichen? Geben Sie Netzwerkadresse und das Präfix an und begründen Sie ihre Antwort. \\
 
-Präfix: /23 \\
+Präfix: 10 \\
 Netzwerkadresse: 192.168.1.0 \\
 
-Das Präfix muss /23 höchstens sein, weil da 512 Hosts reinpassen. 
+Das Netzwerk muss /23 höchstens sein, weil da 512 Hosts reinpassen. 
 
 \subsection{2.}
 Weisen Sie jeder Rechner Klasse einen IP-Adressbereich zu! \\
 
 \begin{itemize}
 \item Linux Server \\
-D $\rightarrow$ 192.168.3.52-102/26 \\
+D $\rightarrow$ 192.168.3.52-102/24 \\
 \item Linux PCs \\
-B $\rightarrow$ 192.168.3.1-51 /26 \\
+B $\rightarrow$ 192.168.3.1-51 /24 \\
 \item Windows PCs \\
 A $\rightarrow$ 192.168.1.1-201 /24 \\ 
 C $\rightarrow$ 192.168.2.1-201/24 \\ 
 \end{itemize}
 
 %----------------------------------------------------------------------------------------
+\section{Forwardingtabellen}
+Geben Sie die Forwarding Information Base (FIB) zu den Hosts A-F und den Routern R1,R2 und R3 an. Versuchen Sie, soweit wie möglich, Routen zusammenzufassen. Verwenden Sie IF1 als Bezeichnung für das Interface, das mit dem Backbone-Netz verbunden ist und IF0 für die Interfaces im jeweiligen LAN. \\
+
+\begin{tabular}{|c|}
+\hline
+A\\
+LAN1:192.168.0.1\\
+Routes\\
+192.168.0.2 via LAN1\\
+￼192.168.0.254 via LAN1\\
+134.2.0.0/16 via ￼192.168.0.254\\
+LAN2 via ￼192.168.0.254\\
+LAN3 via ￼192.168.0.254
+\\\hline
+\end{tabular}\newline\newline
+
+\begin{tabular}{|c|}
+\hline
+B\\
+LAN1:192.168.0.1\\
+192.168.0.1 via LAN1\\
+￼192.168.0.254 via LAN1\\
+134.2.0.0/16 via ￼192.168.0.254\\
+10.0.8.0/21 via ￼192.168.0.254\\
+10.0.0.0/8 via ￼192.168.0.254
+\\\hline
+\end{tabular}\newline\newline
+
+\begin{tabular}{|c|}
+\hline
+C\\
+LAN2:10.0.8.2\\
+Routes\\
+10.0.8.3 via LAN2\\
+10.0.8.1 via LAN2\\
+134.2.0.0/16 via 10.0.8.1\\
+192.168.0.0/24 via 10.0.8.1\\
+10.0.0.0/8 via 10.0.8.1
+\\\hline
+\end{tabular}\newline\newline
+
+\begin{tabular}{|c|}
+\hline
+D\\
+LAN2:10.0.8.3\\
+Routes\\
+10.0.8.2 via LAN2\\
+10.0.8.1 via LAN2\\
+134.2.0.0/16 via 10.0.8.1\\
+192.168.0.0/24 via 10.0.8.1\\
+10.0.0.0/8 via 10.0.8.1
+\\\hline
+\end{tabular}\newline\newline
+
+\begin{tabular}{|c|}
+\hline
+E\\
+LAN3:10.0.0.1\\
+Routes\\
+10.0.0.2 via LAN3\\
+10.0.0.254 via LAN3\\
+134.2.0.0/16 via 10.0.0.254\\
+192.168.0.0/24 via 10.0.0.254\\
+10.0.8.0/21 via 10.0.0.254
+\\\hline
+\end{tabular}\newline\newline
+
+\begin{tabular}{|c|}
+\hline
+F\\
+LAN3:10.0.0.1\\
+Routes\\
+10.0.0.1 via LAN3\\
+10.0.0.254 via LAN3\\
+134.2.0.0/16 via 10.0.0.254\\
+192.168.0.0/24 via 10.0.0.254\\
+10.0.8.0/21 via 10.0.0.254
+\\\hline
+\end{tabular}\newline\newline
+
+R1\newline
+\begin{tabular}{|c|c|c|}
+\hline
+Prefix & Gateway & Interface\\\hline
+192.168.0.0/24 & - & IF0\\
+134.2.0.0/16 & - & IF1\\
+0/0 & 134.2.0.2 & IF1\\
+0/0 & ￼134.2.0.3 & IF1\\
+10.0.8.0/21 & ￼134.2.0.3 & IF1\\
+10.0.0.0/8 & 134.2.0.2 & IF1
+\\\hline
+\end{tabular}\newline\newline
+
+R2\newline
+\begin{tabular}{|c|c|c|}
+\hline
+Prefix & Gateway & Interface\\\hline
+10.0.0.0/8 & - & IF0\\
+134.2.0.0/16 & - & IF1\\
+0/0 & 134.2.0.1 & IF1\\
+0/0 & 134.2.0.3 & IF1\\
+192.168.0.0/24 & 134.2.0.1 & IF1\\
+10.0.8.0/21 & ￼134.2.0.3 & IF1
+\\\hline
+\end{tabular}\newline\newline
+
+R3\newline
+\begin{tabular}{|c|c|c|}
+\hline
+Prefix & Gateway & Interface\\\hline
+10.0.8.0/21 & - & IF0\\
+134.2.0.0/16 & - & IF1\\
+0/0 & 134.2.0.1 & IF1\\
+0/0 & 134.2.0.2 & IF1\\
+192.168.0.0/24 & 134.2.0.1 & IF1\\
+10.0.0.0/8 & 134.2.0.2 & IF1
+\\\hline
+\end{tabular}\newline\newline
+
+%--------------------------------------------
+\section{IP-Fragmentierung}
+Zwei Hosts A und B kommunizieren über IP miteinander. Jeder Host befindet sich in seinem eigenen Netzwerk und ist mit dem Netzwerk des anderen Hosts über ein drittes Netzwerk verbunden. Die Netzwerke sind untereinander mit Routern verbunden. Jedes Netzwerk verwendet seine eigene Übertragstechnik, wodurch sich unterschiedliche Maximum Transmission Units (MTUs) ergeben.
+
+\subsection{1.}
+Finden in beide Richtungen Fragmentierungen statt? Begründen Sie Ihre Antwort! \\
+
+Nein, es finden nur Fragmentierungen von Host A zu Host B statt. \\
+
+Begründung:
+Host B ist an einem Netzwerk mit einem MTU-Wert von 1500 angeschlossen. Sendet also Host B an Host A ein Paket, dann werden nur maximal 1500 Byte große Fragmente versendet, die Host A ohne Probleme aufnehmen kann. In die andere Richtung ist dies nicht möglich, d.h. der IP-Router muss die Fragmente in weitere kleinere Fragmente aufteilen und sendet die Fragmente getrennt. D.h. Router A muss das Paket fragmentieren, um es zu Router B zu senden und Router B muss die Fragmente fragmentieren, ums sie zum Ziel Host B zu senden.
+
+\subsection{2.}
+Host A sendet ein 4352 Byte großes IP-Paket an Host B. Was geschieht auf dem Weg zu Host B mit dem Paket? Wie oft wird das Paket fragmentiert? Geben Sie die IP Fragmente, die bei Host B ankommen sowie die Zwischenschritte als Tabelle mit den Spalten fragment number,payload, fragment length, fragment offset und MF-bit an. \\
+
+Host A sendet ein 4352 Byte großes IP-Paket an Host B. Netz A ist ein FDDI, d.h. das Paket bekommt erstmal einen FDDI Header. Jetzt wird das Paket mit dem Header an Router A gesendet. Dieser entpackt es und wirft den Rahmen Header weg. Er fragmentiert das Paket in zwei Fragmente mit gleichem Format, da der MTU-Wert nur 2272 beträgt und setzt einen WiFi-Header auf beide Fragmente. Ein Bit im Feld flags kennzeichnet, dass es zwei Fragmente sind und weitere Felder des Headers kennzeichnen auch die Reihenfolge,wie das Paket ursprünglich zusammengehört. Um ein Paket für die Übertragung in ein anderes Netzwerk zu fragmentieren, berechnet der Router die maximale Datenmenge pro Fragment und die benötigte Anzahl von Fragmenten anhand des MTU-Wertes. Beim Erzeugen der Fragmente, beginnt der Router jedes Fragment mit einer Kopie des Original Headers anzuheften und modifiziert die einzelnen Header-Felder, um jedes Fragment entsprechend zu kennzeichnen. Schließlich kopiert er die Daten aus dem Original-Paket und überträgt sie einzeln.
+Router A sendet nun beide Fragmente zu Router B. Dieser muss die Fragmente nochmals fragmentieren, da der MTU-Wert wieder geringer ist als die Fragmente. Der WiFi Header wird wieder verworfen und ein Ethernet Header wird verwendet. Dabei fragmentiert er die Fragmente neu, wie oben beschrieben. Es sind jetzt also vier Fragmente die dann über das Netz B an den Host B gesendet werden. Nach der Übertragung müssen die einzelnen Fragmente wieder zusammengesetzt werden. Da jedes Fragment mit dem Header des Original-Paketes beginnen, haben alle Fragmente die selbe Zieladresse. Darüber hinaus befindet im Header, des letzten Fragments ein zusätzliches Bit, um zu erkennen ob alle Fragmente angekommen sind. Der Ziel-Host B sammelt die Fragmente und fügt sie zum Original zusammen. D.h. auf dem Weg wird das Paket zweimal fragmentiert und beim Ziel Host B reassembliert. \\
+
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+ & fragment number &  payload & fragment length & fragment offset & MF-bit \\\hline
+FDDI & 1 & 4352 & 4352 & 0 & 0\\\hline
+WiFi & 1.1 & 2176 & 2272 & 0 & 1\\
+     & 1.2 & 2176 & 2272 & 272 & 0\\\hline
+Ethernet & 1.1.1 & 1088 & 1500 & 0 & 3\\
+         & 1.1.2 & 1088 & 1500 & 0 & 0\\
+         & 1.2.1 & 1088 & 1500 & 0 & 0\\
+         & 1.2.2 & 1088 & 1500 & 136 & 0\\\hline
+\end{tabular}
+
+
+%--------------------------------------------
+\section{Address Resolution Protocol (ARP)}
+Gegeben sei ein IP-Netzwerk mit den Host A,B,C und leeren ARP-Tabellen. A möchte ein Paket an B senden und verschickt zuvor einen ARP-Request. Anschließend möchte C ein Paket an A senden.
+
+\subsection{1.}
+Muss C einen eigenen ARP-Request verschicken? Begründen Sie Ihre Antwort! \\
+
+Ja, C muss eine ARP-Request versenden. \\
+
+Begründung:
+A möchte ein Paket an B senden. A sendet also eine ARP-Request mit der IP-Adresse von B an alle im Netzwerk angeschlossenen Hosts. Alle Hosts erhalten die Anfrage, aber nur der Host B, mit der angefragten IP-Adresse, sendet ein ARP-Reply zurück. Alle Übrigen verwerfen die Anfrage, ohne eine Antwort zu senden. D.h. Host C muss eine seperate ARP-Request mit der IP-Adresse von A schicken, um das Paket senden zu können.
+
+\subsection{2.}
+Wie viele ARP-Pakete müssen mindestens verschickt werden, um den angestrebten Paketversand sowohl für A als auch für C zu ermöglichen? Nennen Sie auch die Paket-Typen (Request,Reply) und begründen Sie ihre Antwort! \\ 
+
+\begin{tabular}{|c|c|c|}
+\hline
+A sendet ARP-Request &                        & \\\hline
+                     & B erhält die Anfrage   & C erhält die Anfrage \\\hline
+                     & B sendet ARP-Reply     & C verwirft die Anfrage \\\hline
+A erhält die Antwort &                        & \\\hline
+                     &                        & C sendet ARP-Request \\\hline
+A erhält die Anfrage & B erhält die Anfrage   & \\\hline
+A sendet ARP-Reply   & B verwirft die Anfrage & \\\hline
+                     &                        & C erhält die Antwort  \\\hline
+\end{tabular} \\
+
+
+D.h. es müssen mindestens 6 ARP-Pakete verschickt werden, weil ARP-Requests an alle im Netzwerk gesendet werden müssen. Im Gegensatz dazu werden ARP-Replys nicht rundgesendet, sondern direkt vom angesprochenem Host an den anfragenden Host gesendet.
+
+%--------------------------------------------
 
 \end{document}
